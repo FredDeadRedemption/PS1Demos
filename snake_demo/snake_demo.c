@@ -150,10 +150,18 @@ typedef struct gameObject {
     color_t color;
 } gameObject_t;
 
+typedef struct snakeBodyPart {
+    gameObject_t base;
+
+} snakeBodyPart_t;
+
 typedef struct snake {
     gameObject_t base;
     int length;
+    snakeBodyPart_t snakeBodyPart[length];
 } snake_t;
+
+
 
 typedef struct food {
     gameObject_t base;

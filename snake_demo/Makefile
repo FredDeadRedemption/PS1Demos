@@ -1,5 +1,5 @@
-TARGET = hello_tester
+TARGET = snake_demo
 
-SRCS = hello_tester.c \
+SRCS = snake_demo.c \
 
 include ../common.mk 

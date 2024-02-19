@@ -1,11 +1,11 @@
-hello_tester:
-	$(MAKE) -C hello_tester
+snake_demo:
+	$(MAKE) -C snake_demo
 
 clean:
-	$(MAKE) -C hello_tester clean
+	$(MAKE) -C snake_demo clean
 
 
 	
 # declare phony rules
-.PHONY: hello_tester \
+.PHONY: snake_demo \
 		clean all

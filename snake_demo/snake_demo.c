@@ -7,6 +7,7 @@
 
 #define OTLEN 8         // Ordering table length (recommended to set as a define
 // so it can be changed easily)
+#define MAX_SNAKE_LENGTH 50
 
 // Define environment pairs and buffer counter
 DISPENV disp[2];
@@ -143,6 +144,7 @@ color_t RED = {255, 0, 0};
 color_t BLUE = {0, 0, 255};
 color_t GREEN = {0, 255, 0};
 color_t YELLOW = {255, 255, 0};
+color_t WHITE = {255, 255, 255};
 
 typedef struct gameObject {
     position_t position;
@@ -150,17 +152,11 @@ typedef struct gameObject {
     color_t color;
 } gameObject_t;
 
-typedef struct snakeBodyPart {
-    gameObject_t base;
-
-} snakeBodyPart_t;
-
 typedef struct snake {
     gameObject_t base;
+    position_t segments[MAX_SNAKE_LENGTH];
     int length;
-    snakeBodyPart_t snakeBodyPart[length];
 } snake_t;
-
 
 
 typedef struct food {
@@ -186,6 +182,68 @@ void renderGameObjects(gameObject_t objects[], int count) {
     }
 }
 
+void moveSnake(snake_t* snake, int x, int y) {
+    for(int i = 0; i < snake->length; i++) {
+
+            snake->segments[i].x += x;
+            snake->segments[i].y += y;
+    }
+}
+
+void renderSnake(snake_t snake) {
+    for(int i = 0; i < snake.length; i++) {
+        color_t current_color;
+        if (i % 2 == 1) {
+            current_color = GREEN;
+        } else {
+            current_color = WHITE;
+        }
+        gameObject_t gameObject = {snake.segments[i].x, snake.segments[i].y, snake.base.textureSize.width, snake.base.textureSize.height, current_color};
+        renderGameObject(&gameObject);
+    }
+}
+
+void initializeSnake(snake_t* snake) {
+    snake->segments[0].x = snake->base.position.x;
+    snake->segments[0].y = snake->base.position.y;
+    snake->length = 1;
+}
+
+void growSnake(snake_t* snake, enum Direction direction) {
+    if (snake->length < MAX_SNAKE_LENGTH) {
+        int x, y;
+        switch (direction) {
+            case UP:
+                x = 0;
+                y = 16;
+                break;
+            case DOWN:
+                x = 0;
+                y = -16;
+                break;
+            case RIGHT:
+                x = -16;
+                y = 0;
+                break;
+            case LEFT:
+                x = 16;
+                y = 0;
+                break;
+            case NONE:
+                break;
+        }
+
+        snake->segments[snake->length].x = snake->segments[snake->length-1].x + x;
+        snake->segments[snake->length].y = snake->segments[snake->length-1].y + y;
+
+
+        snake->length++;
+    } else {
+
+        printf("Snake has reached maximum length.\n");
+    }
+}
+
 
 int main()
 {
@@ -205,7 +263,8 @@ int main()
     food_t f2 = {128, 160, 12,12, RED};
 
     snake_t snake = {128,128, 16,16, GREEN};
-    gameObject_t gameObjects[3];
+    initializeSnake(&snake);
+    gameObject_t gameObjects[10];
     gameObjects[0] = snake.base;
     gameObjects[1] = f1.base;
     gameObjects[2] = f2.base;
@@ -239,6 +298,10 @@ int main()
                 {
                     direction = RIGHT;
                 }
+                if( !(pad->btn&PAD_CROSS) && (counter % 16 == 0)) { // test CROSS
+                    growSnake(&snake, direction);
+                    //printf("CROSS \n");
+                }
             }
         }
 
@@ -247,15 +310,19 @@ int main()
             switch (direction) {
                 case UP:
                     gameObjects[0].position.y -= speed;
+                    moveSnake(&snake, 0, -speed);
                     break;
                 case DOWN:
                     gameObjects[0].position.y += speed;
+                    moveSnake(&snake, 0, speed);
                     break;
                 case RIGHT:
                     gameObjects[0].position.x += speed;
+                    moveSnake(&snake, speed, 0);
                     break;
                 case LEFT:
                     gameObjects[0].position.x -= speed;
+                    moveSnake(&snake, -speed, 0);
                     break;
                 case NONE:
                     pos_x = pos_y = 48;
@@ -268,6 +335,10 @@ int main()
 
 
         renderGameObjects(gameObjects, 3);
+        renderSnake(snake);
+        FntPrint("x:%d, y:%d", gameObjects[0].position.x, gameObjects[0].position.y);
+
+        FntFlush(-1);
 
         display();
     }

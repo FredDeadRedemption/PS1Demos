@@ -7,7 +7,7 @@
 
 #define OTLEN 8         // Ordering table length (recommended to set as a define
 // so it can be changed easily)
-#define MAX_SNAKE_LENGTH 50
+#define MAX_SNAKE_LENGTH 300
 
 // Define environment pairs and buffer counter
 DISPENV disp[2];
@@ -152,12 +152,16 @@ typedef struct gameObject {
     color_t color;
 } gameObject_t;
 
+typedef struct segment {
+    position_t current;
+    position_t next;
+} segment_t;
+
 typedef struct snake {
     gameObject_t base;
-    position_t segments[MAX_SNAKE_LENGTH];
+    segment_t segments[MAX_SNAKE_LENGTH];
     int length;
 } snake_t;
-
 
 typedef struct food {
     gameObject_t base;
@@ -176,84 +180,80 @@ void renderGameObject(gameObject_t* object) {
     nextpri += sizeof(TILE);    // Advance the next primitive pointer
 }
 
-void renderGameObjects(gameObject_t objects[], int count) {
+void renderGameObjects(gameObject_t* objects[], int count) {
     for(int i = 0; i < count; i++) {
-        renderGameObject(&objects[i]);
+        renderGameObject(objects[i]);
     }
 }
 
-void moveSnake(snake_t* snake, int x, int y) {
+void moveSnake(snake_t* snake) {
+    /*for(int i = 0; i < snake->length; i++) {
+
+        if (i+1 > snake->length) {
+            snake->segments[i + 1].current.x = snake->segments[i].current.x;
+            snake->segments[i + 1].current.y = snake->segments[i].current.y;
+        }
+
+    }*/
+    for (int i = snake->length - 1; i > 0; i--) {
+        snake->segments[i].current.x = snake->segments[i - 1].current.x;
+        snake->segments[i].current.y = snake->segments[i - 1].current.y;
+    }
+    snake->segments[0].current.x = snake->base.position.x;
+    snake->segments[0].current.y = snake->base.position.y;
+}
+
+void renderSnake(snake_t* snake) {
     for(int i = 0; i < snake->length; i++) {
-
-            snake->segments[i].x += x;
-            snake->segments[i].y += y;
-    }
-}
-
-void renderSnake(snake_t snake) {
-    for(int i = 0; i < snake.length; i++) {
         color_t current_color;
         if (i % 2 == 1) {
-            current_color = GREEN;
-        } else {
             current_color = WHITE;
+        } else {
+            current_color = GREEN;
         }
-        gameObject_t gameObject = {snake.segments[i].x, snake.segments[i].y, snake.base.textureSize.width, snake.base.textureSize.height, current_color};
+        gameObject_t gameObject = {snake->segments[i].current.x, snake->segments[i].current.y, snake->base.textureSize.width, snake->base.textureSize.height, current_color};
         renderGameObject(&gameObject);
     }
 }
 
 void initializeSnake(snake_t* snake) {
-    snake->segments[0].x = snake->base.position.x;
-    snake->segments[0].y = snake->base.position.y;
+    snake->segments[0].current.x = snake->base.position.x;
+    snake->segments[0].current.y = snake->base.position.y;
     snake->length = 1;
 }
 
-void growSnake(snake_t* snake, enum Direction direction) {
+void growSnake(snake_t* snake) {
     if (snake->length < MAX_SNAKE_LENGTH) {
-        int x, y;
-        switch (direction) {
-            case UP:
-                x = 0;
-                y = 16;
-                break;
-            case DOWN:
-                x = 0;
-                y = -16;
-                break;
-            case RIGHT:
-                x = -16;
-                y = 0;
-                break;
-            case LEFT:
-                x = 16;
-                y = 0;
-                break;
-            case NONE:
-                break;
-        }
-
-        snake->segments[snake->length].x = snake->segments[snake->length-1].x + x;
-        snake->segments[snake->length].y = snake->segments[snake->length-1].y + y;
-
 
         snake->length++;
-    } else {
 
+    } else {
         printf("Snake has reached maximum length.\n");
     }
 }
 
+int isColliding(gameObject_t gameObject1, gameObject_t* gameObject2) {
+    return(gameObject1.position.x == gameObject2->position.x &&
+    gameObject1.position.y == gameObject2->position.y);
+}
 
-int main()
-{
+void foodCollision(snake_t* snake, gameObject_t* gameObjects[], int size) {
+    for (int i = 1; i < size; i++) {
+        if (isColliding(snake->base, gameObjects[i])) {
+            growSnake(snake);
+        }
+    }
+}
+
+
+int main() {
 
     int pos_x,pos_y;
     PADTYPE *pad;
     init();
     enum Direction direction;
 
-    pos_x = pos_y = 64;
+    int size_gameObjects = 0;
 
     int counter = 0;
     int speed = 16;
@@ -262,12 +262,15 @@ int main()
     food_t f1 = {32, 32, 8,8, RED};
     food_t f2 = {128, 160, 12,12, RED};
 
-    snake_t snake = {128,128, 16,16, GREEN};
+    snake_t snake = {128,128, 16, 16, GREEN};
     initializeSnake(&snake);
-    gameObject_t gameObjects[10];
-    gameObjects[0] = snake.base;
-    gameObjects[1] = f1.base;
-    gameObjects[2] = f2.base;
+    gameObject_t *gameObjects[10];
+    gameObjects[0] = &snake.base;
+    size_gameObjects++;
+    gameObjects[1] = &f1.base;
+    size_gameObjects++;
+    gameObjects[2] = &f2.base;
+    size_gameObjects++;
 
 
     // Main loop
@@ -283,23 +286,19 @@ int main()
             if( ( pad->type == 0x4 ) ||
                 ( pad->type == 0x5 ) ||
                 ( pad->type == 0x7 ) ) {
-                if( !(pad->btn&PAD_UP) ) { // test UP
+                if (!(pad->btn & PAD_UP) && direction != DOWN) {
                     direction = UP;
-                }
-                else if( !(pad->btn&PAD_DOWN) )       // test DOWN
-                {
+                } else if (!(pad->btn & PAD_DOWN) && direction != UP) {
                     direction = DOWN;
                 }
-                if( !(pad->btn&PAD_LEFT) )          // test LEFT
-                {
+
+                if (!(pad->btn & PAD_LEFT) && direction != RIGHT) {
                     direction = LEFT;
-                }
-                else if( !(pad->btn&PAD_RIGHT) )    // test RIGHT
-                {
+                } else if (!(pad->btn & PAD_RIGHT) && direction != LEFT) {
                     direction = RIGHT;
                 }
                 if( !(pad->btn&PAD_CROSS) && (counter % 16 == 0)) { // test CROSS
-                    growSnake(&snake, direction);
+                    growSnake(&snake);
                     //printf("CROSS \n");
                 }
             }
@@ -309,34 +308,41 @@ int main()
             counter = 0;
             switch (direction) {
                 case UP:
-                    gameObjects[0].position.y -= speed;
-                    moveSnake(&snake, 0, -speed);
+                    //snake->base.position.y -= speed;
+                    gameObjects[0]->position.y -= speed;
+                    //moveSnake(&snake, 0, -speed);
                     break;
                 case DOWN:
-                    gameObjects[0].position.y += speed;
-                    moveSnake(&snake, 0, speed);
+                    //snake->base.position.y += speed;
+                    gameObjects[0]->position.y += speed;
+                    //moveSnake(&snake, 0, speed);
                     break;
                 case RIGHT:
-                    gameObjects[0].position.x += speed;
-                    moveSnake(&snake, speed, 0);
+                    //snake->base.position.x += speed;
+                    gameObjects[0]->position.x += speed;
+                    //moveSnake(&snake, speed, 0);
                     break;
                 case LEFT:
-                    gameObjects[0].position.x -= speed;
-                    moveSnake(&snake, -speed, 0);
+                    //snake->base.position.x -= speed;
+                    gameObjects[0]->position.x -= speed;
+                    //moveSnake(&snake, -speed, 0);
                     break;
                 case NONE:
                     pos_x = pos_y = 48;
                     break;
             }
 
+            foodCollision(&snake, gameObjects, size_gameObjects);
+            moveSnake(&snake);
         }
+
+
 
         ClearOTagR(ot[db], OTLEN);  // Clear ordering table
 
-
-        renderGameObjects(gameObjects, 3);
-        renderSnake(snake);
-        FntPrint("x:%d, y:%d", gameObjects[0].position.x, gameObjects[0].position.y);
+        renderGameObjects(gameObjects, size_gameObjects);
+        renderSnake(&snake);
+        FntPrint("x:%d, y:%d", snake.segments[0].current.x, snake.segments[0].current.y);
 
         FntFlush(-1);
 

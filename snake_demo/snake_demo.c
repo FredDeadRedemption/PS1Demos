@@ -4,6 +4,8 @@
 #include <libgte.h>	// GTE header, not really used but libgpu.h depends on it
 #include <libgpu.h>	// GPU library header
 #include <libapi.h>     // API header, has InitPAD() and StartPAD() defs
+#include <stdlib.h>
+
 
 #define OTLEN 8         // Ordering table length (recommended to set as a define
 // so it can be changed easily)
@@ -195,12 +197,20 @@ void moveSnake(snake_t* snake) {
         }
 
     }*/
+
     for (int i = snake->length - 1; i > 0; i--) {
         snake->segments[i].current.x = snake->segments[i - 1].current.x;
         snake->segments[i].current.y = snake->segments[i - 1].current.y;
+
+        if(snake->segments[0].current.x == snake->segments[i].current.x && snake->segments[0].current.y == snake->segments[i].current.y) {
+            printf("DEAD\n");
+        } //TODO: Her skal snake collsion fikses
+
     }
+
     snake->segments[0].current.x = snake->base.position.x;
     snake->segments[0].current.y = snake->base.position.y;
+
 }
 
 void renderSnake(snake_t* snake) {
@@ -237,16 +247,31 @@ int isColliding(gameObject_t gameObject1, gameObject_t* gameObject2) {
     gameObject1.position.y == gameObject2->position.y);
 }
 
-void foodCollision(snake_t* snake, gameObject_t* gameObjects[], int size) {
+int foodCollision(snake_t* snake, gameObject_t* gameObjects[], int size) {
     for (int i = 1; i < size; i++) {
         if (isColliding(snake->base, gameObjects[i])) {
-            growSnake(snake);
+
+            return 1;
+        } else {
+            return 0;
         }
     }
 }
 
+int randomInRange(int min, int max) {
+    return min + rand() % (max - min + 1);
+}
+
+void moveFood(food_t* food) {
+    food->base.position.x = randomInRange(0, (320-16)/16) * 16;
+    food->base.position.y = randomInRange(0, (240-16)/16) * 16;
+}
+
 
 int main() {
+
+    // Seed the random number generator with the current time
+    srand(123);
 
     int pos_x,pos_y;
     PADTYPE *pad;
@@ -259,17 +284,14 @@ int main() {
     int speed = 16;
 
 
-    food_t f1 = {32, 32, 8,8, RED};
-    food_t f2 = {128, 160, 12,12, RED};
+    food_t food = {32, 32, 16,16, RED};
 
     snake_t snake = {128,128, 16, 16, GREEN};
     initializeSnake(&snake);
     gameObject_t *gameObjects[10];
     gameObjects[0] = &snake.base;
     size_gameObjects++;
-    gameObjects[1] = &f1.base;
-    size_gameObjects++;
-    gameObjects[2] = &f2.base;
+    gameObjects[1] = &food.base;
     size_gameObjects++;
 
 
@@ -298,6 +320,7 @@ int main() {
                     direction = RIGHT;
                 }
                 if( !(pad->btn&PAD_CROSS) && (counter % 16 == 0)) { // test CROSS
+
                     growSnake(&snake);
                     //printf("CROSS \n");
                 }
@@ -332,7 +355,10 @@ int main() {
                     break;
             }
 
-            foodCollision(&snake, gameObjects, size_gameObjects);
+            if (foodCollision(&snake, gameObjects, size_gameObjects)) {
+                growSnake(&snake);
+                moveFood(&food);
+            }
             moveSnake(&snake);
         }
 

@@ -371,7 +371,6 @@ int main() {
         FntPrint("x:%d, y:%d", snake.segments[0].current.x, snake.segments[0].current.y);
 
         FntFlush(-1);
-
         display();
     }
     return 0;

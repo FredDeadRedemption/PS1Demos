@@ -1,0 +1,60 @@
+Class main() : Game {
+    start() {
+        Snake snake = new Snake();
+        Food food = new Food();
+
+        snake.food = food; //pass reference of food object to snake object
+        food.snake = snake; //pass reference of snake object to food object
+
+
+
+
+    }
+
+    update() {
+
+    }
+}
+
+class Snake : GameObject {
+    Food food; //reference to some food object
+    start() {
+        this.x = 16;
+        this.y = 16;
+        this.size = 16;
+        this.texture = ...; //set super GameObjects values
+    }
+
+    update() {
+        if(input.UP) {
+            this.translate(-16, 0); //adds to x and y of super GameObject
+        }
+        .
+        .
+        .
+
+        moveSegments();
+
+    }
+
+    void moveSegment() { //You are able to make your own functions/methods
+        //They be movin'
+    }
+}
+
+class Food : GameObject {
+    Snake snake; //reference to some snake object
+    start() {
+        this.x = 16;
+        this.y = 16;
+        this.size = 16;
+        this.texture = ...; //set super GameObjects values
+    }
+
+    update() {
+        if(this.isColliding(snake)) {
+            this.x = randomRange(0, ScreenWidth);
+            this.y = randomRange(0, ScreenHeight); //Example of a inbuilt function/method
+        }
+    }
+}

@@ -1,17 +1,46 @@
 public class Main {
 
-
-
     public static void main(String[] args) {
-        LifeCycle lifeCycle = new LifeCycle();
-        
+        new LifeCycle();
     }
 }
 
+class LifeCycle {
 
-public class LifeCycle {
+    private Snake snake;
+
+
+
+    private Food food;
+    private Renderer renderer;
+    private GameObject[] gameObjectsList = new GameObject[2];
+
+    public LifeCycle() {
+        renderer = new Renderer(gameObjectsList);
+        Start();
+        Update();
+
+    }
+
     public void Start() {
-        System.out.print("Hej");
+        Snake snake = new Snake(1, 1);
+        Food food = new Food(2, 2);
+
+        gameObjectsList[0] = snake;
+        //System.out.println(snake.x);
+
+
+        gameObjectsList[1] = food;
+
+        renderer.renderGame();
+        System.out.println();
+
+        snake.direction = Direction.UP;
+        snake.move();
+
+        renderer.renderGame();
+
+
     }
     public void Update() {
 
@@ -27,7 +56,22 @@ public class LifeCycle {
             double delta = updateLength / ((double)OPTIMAL_TIME);
 
             // Your loop logic goes here
-            System.out.println("hello 2");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // Adjust loop timing
             try {
@@ -39,13 +83,9 @@ public class LifeCycle {
 
     }
 
-    public LifeCycle() {
-        Start();
-        Update();
+    private void addGameObject(GameObject gameObject) {
+
     }
+
+
 }
-
-
-
-
-

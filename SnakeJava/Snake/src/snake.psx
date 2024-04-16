@@ -3,6 +3,9 @@ Class main() : Game {
         Snake snake = new Snake();
         Food food = new Food();
 
+        Controller controller1 = new Controller(); //initializes gamepad
+        Controller controller2 = new Controller(); //Controller is built in class
+
         snake.food = food; //pass reference of food object to snake object
         food.snake = snake; //pass reference of snake object to food object
 
@@ -17,12 +20,18 @@ Class main() : Game {
 }
 
 class Snake : GameObject {
+    int length = 10;
     Food food; //reference to some food object
     start() {
-        this.x = 16;
-        this.y = 16;
-        this.size = 16;
-        this.texture = ...; //set super GameObjects values
+        super.x = 16;
+        super.y = 16;
+        super.size = 16;
+        super.texture = ...; //set super GameObjects values
+    }
+
+    Snake(int length, int size) {
+        super.size = size;
+        this.length = length;
     }
 
     update() {
@@ -43,18 +52,18 @@ class Snake : GameObject {
 }
 
 class Food : GameObject {
-    Snake snake; //reference to some snake object
+    Snake snake = new Snake(8, 8); //reference to some snake object
     start() {
-        this.x = 16;
-        this.y = 16;
-        this.size = 16;
-        this.texture = ...; //set super GameObjects values
+        super.x = 16;
+        super.y = 16;
+        super.size = 16;
+        super.texture = ...; //set super GameObjects values
     }
 
     update() {
         if(this.isColliding(snake)) {
-            this.x = randomRange(0, ScreenWidth);
-            this.y = randomRange(0, ScreenHeight); //Example of a inbuilt function/method
+            super.x = randomRange(0, ScreenWidth);
+            super.y = randomRange(0, ScreenHeight); //Example of a inbuilt function/method
         }
     }
 }

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/User/Documents/GitHub/PS1Demos/snake_demo",
-      "program": "c:/Users/User/Documents/GitHub/PS1Demos/snake_demo/build/Debug/outDebug",
+      "cwd": "c:/Users/Tue/Documents/GitHub/PS1Demos/snake_demo",
+      "program": "c:/Users/Tue/Documents/GitHub/PS1Demos/snake_demo/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -1,4 +1,6 @@
-Class main() : Game {
+bool gameOver = false;
+
+main() {
     start() {
         Snake snake = new Snake();
         Food food = new Food();
@@ -15,8 +17,14 @@ Class main() : Game {
     }
 
     update() {
-
+        if (checkDeath()) {
+            gameOver = true;
+        }
     }
+}
+
+bool checkDeath() {
+    //do the deaddening
 }
 
 class Snake : GameObject {
@@ -42,7 +50,7 @@ class Snake : GameObject {
         .
         .
 
-        moveSegments();
+        this.moveSegments();
 
     }
 

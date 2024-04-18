@@ -1,6 +1,6 @@
 bool gameOver = false;
 
-main() {
+game() {
     start() {
         Snake snake = new Snake();
         Food food = new Food();
@@ -10,10 +10,6 @@ main() {
 
         snake.food = food; //pass reference of food object to snake object
         food.snake = snake; //pass reference of snake object to food object
-
-
-
-
     }
 
     update() {
@@ -27,19 +23,33 @@ bool checkDeath() {
     //do the deaddening
 }
 
+class Segment {
+    int x;
+    int y;
+
+    void move() {
+        //move em
+    }
+}
+
+
 class Snake : GameObject {
+
+    Segment segments[1000];
     int length = 10;
+
     Food food; //reference to some food object
+    
+    Snake(int length, int size) {
+        super.size = size;
+        this.length = length;
+    }
+
     start() {
         super.x = 16;
         super.y = 16;
         super.size = 16;
         super.texture = ...; //set super GameObjects values
-    }
-
-    Snake(int length, int size) {
-        super.size = size;
-        this.length = length;
     }
 
     update() {
@@ -49,13 +59,21 @@ class Snake : GameObject {
         .
         .
         .
-
         this.moveSegments();
 
     }
 
-    void moveSegment() { //You are able to make your own functions/methods
+    void moveSegments() { //You are able to make your own functions/methods
         //They be movin'
+        foreach (Segment segment in segments) {
+            //move em
+            segment.move();
+        }
+    }
+
+    void grow() {
+        //grow the snake
+        segments[segments.length] = new Segment();
     }
 }
 
@@ -72,6 +90,7 @@ class Food : GameObject {
         if(this.isColliding(snake)) {
             super.x = randomRange(0, ScreenWidth);
             super.y = randomRange(0, ScreenHeight); //Example of a inbuilt function/method
+            snake.grow();
         }
     }
 }

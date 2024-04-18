@@ -37,14 +37,11 @@ int GameObject_Is_Colliding(GameObject_t object1, GameObject_t object2) {
 typedef struct Snake Snake_t;
 typedef struct Food Food_t;
 
-
 struct Snake {
     Food_t food;
     int length;
     GameObject_t gameObject;
 };
-
-
 
 void Snake_moveSegments() {
     //move them

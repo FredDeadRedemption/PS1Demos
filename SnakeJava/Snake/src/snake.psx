@@ -1,25 +1,29 @@
 bool gameOver = false;
 
 game() {
-    start() {
-        Snake snake = new Snake();
-        Food food = new Food();
 
-        Controller controller1 = new Controller(); //initializes gamepad
-        Controller controller2 = new Controller(); //Controller is built in class
+    Snake snake = new Snake(8, 8);
+    Snake snake2;
+
+    Food food = new Food();
+
+    Controller controller1 = new Controller(); //initializes gamepad
+    Controller controller2 = new Controller(); //Controller is built in class
+
+    start() {
 
         snake.food = food; //pass reference of food object to snake object
         food.snake = snake; //pass reference of snake object to food object
     }
 
     update() {
-        if (checkDeath()) {
+        if (checkDeath(snake)) {
             gameOver = true;
         }
     }
 }
 
-bool checkDeath() {
+bool checkDeath(Snake snake) {
     //do the deaddening
 }
 
@@ -28,7 +32,9 @@ class Segment {
     int y;
 
     void move() {
-        //move em
+        if (!gameOver) {
+            //move em
+        }
     }
 }
 
@@ -78,12 +84,16 @@ class Snake : GameObject {
 }
 
 class Food : GameObject {
-    Snake snake = new Snake(8, 8); //reference to some snake object
+    Snake snake; //reference to some snake object
+    //it is illegal to initialize an object in a class, they are simply pointers
+    // Snake snake = new Snake(8, 8); <- illegal, go to jail
     start() {
         super.x = 16;
         super.y = 16;
         super.size = 16;
         super.texture = ...; //set super GameObjects values
+
+        this.snake = new Snake(8, 8); // <- this should be legal
     }
 
     update() {

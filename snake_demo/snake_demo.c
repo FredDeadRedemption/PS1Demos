@@ -9,7 +9,7 @@
 
 #define OTLEN 8         // Ordering table length (recommended to set as a define
 // so it can be changed easily)
-#define MAX_SNAKE_LENGTH 300
+#define MAX_SNAKE_LENGTH 10
 
 // Define environment pairs and buffer counter
 DISPENV disp[2];
@@ -168,7 +168,7 @@ typedef struct snake {
 typedef struct food {
     gameObject_t base;
     int value : 1;
-} food_t;
+} food;
 
 void renderGameObject(gameObject_t* object) {
     tile = (TILE*)nextpri;      // Cast next primitive
@@ -226,10 +226,17 @@ void renderSnake(snake_t* snake) {
     }
 }
 
-void initializeSnake(snake_t* snake) {
-    snake->segments[0].current.x = snake->base.position.x;
-    snake->segments[0].current.y = snake->base.position.y;
-    snake->length = 1;
+snake_t initializeSnake() {
+    snake_t snake;
+    snake.base.position.x = 128;
+    snake.base.position.y = 128;
+    snake.base.textureSize.height = 16;
+    snake.base.textureSize.width = 16;
+    snake.base.color = GREEN;
+    snake.segments[0].current.x = snake.base.position.x;
+    snake.segments[0].current.y = snake.base.position.y;
+    snake.length = 1;
+    return snake;
 }
 
 void growSnake(snake_t* snake) {
@@ -238,7 +245,7 @@ void growSnake(snake_t* snake) {
         snake->length++;
 
     } else {
-        printf("Snake has reached maximum length.\n");
+        FntPrint("Max length has been reached");
     }
 }
 
@@ -262,7 +269,7 @@ int randomInRange(int min, int max) {
     return min + rand() % (max - min + 1);
 }
 
-void moveFood(food_t* food) {
+void moveFood(food* food) {
     food->base.position.x = randomInRange(0, (320-16)/16) * 16;
     food->base.position.y = randomInRange(0, (240-16)/16) * 16;
 }
@@ -284,10 +291,9 @@ int main() {
     int speed = 16;
 
 
-    food_t food = {32, 32, 16,16, RED};
+    food food = {32, 32, 16,16, RED};
 
-    snake_t snake = {128,128, 16, 16, GREEN};
-    initializeSnake(&snake);
+    snake_t snake = initializeSnake();
     gameObject_t *gameObjects[10];
     gameObjects[0] = &snake.base;
     size_gameObjects++;
@@ -368,7 +374,7 @@ int main() {
 
         renderGameObjects(gameObjects, size_gameObjects);
         renderSnake(&snake);
-        FntPrint("x:%d, y:%d", snake.segments[0].current.x, snake.segments[0].current.y);
+        
 
         FntFlush(-1);
         display();

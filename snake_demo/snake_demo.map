@@ -24,8 +24,6 @@ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l02.o)
                               C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(pad.o) (SysEnqIntRP)
 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l03.o)
                               C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(pad.o) (SysDeqIntRP)
-C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c43.o)
-                              snake_demo.o (memset)
 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c47.o)
                               snake_demo.o (rand)
 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c48.o)
@@ -88,6 +86,8 @@ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c27.o)
                               C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o) (strlen)
 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c42.o)
                               C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o) (memcpy)
+C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c43.o)
+                              C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o) (memset)
 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vmode.o)
                               C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e03.o) (GetVideoMode)
 
@@ -97,8 +97,6 @@ Discarded input sections
  .MIPS.abiflags
                 0x0000000000000000       0x18 snake_demo.o
  .pdr           0x0000000000000000      0x1a0 snake_demo.o
- .text.initializeSnake
-                0x0000000000000000       0x24 snake_demo.o
  .text.isColliding
                 0x0000000000000000       0x38 snake_demo.o
  .text.foodCollision
@@ -174,8 +172,8 @@ END GROUP
                 0x000000001f800000                __dcache = ORIGIN (dcache)
                 0x000000001f800400                __dcache_top = (ORIGIN (dcache) + LENGTH (dcache))
                 0x0000000000015e00                __bss_len = (__bss_end - __bss_start)
-                0x00000000000057d0                __ftext_len = (__ftext_end - __ftext_start)
-                0x0000000000002830                __fdata_len = (__fdata_end - __fdata_start)
+                0x00000000000057c0                __ftext_len = (__ftext_end - __ftext_start)
+                0x0000000000002840                __fdata_len = (__fdata_end - __fdata_start)
                 0x0000000080200000                __stack_start = (ORIGIN (ram) + LENGTH (ram))
 
 .PSX_EXE_Header
@@ -204,7 +202,7 @@ END GROUP
  *fill*         0x000000008000f838      0x7c8 
                 0x0000000080010000                __ftext_start = ABSOLUTE (.)
 
-.text           0x0000000080010000     0x57d0
+.text           0x0000000080010000     0x57c0
  *(.start)
  .start         0x0000000080010000       0x64 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
                 0x0000000080010000                _start
@@ -214,258 +212,262 @@ END GROUP
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
  .text.startup.main
-                0x0000000080010064      0x2c8 snake_demo.o
+                0x0000000080010064      0x260 snake_demo.o
                 0x0000000080010064                main
  *(.text.hot .text.hot.*)
  *(.text .stub .text.* .gnu.linkonce.t.*)
- .text.init     0x000000008001032c      0x134 snake_demo.o
-                0x000000008001032c                init
- .text.display  0x0000000080010460       0xb8 snake_demo.o
-                0x0000000080010460                display
+ .text.init     0x00000000800102c4      0x134 snake_demo.o
+                0x00000000800102c4                init
+ .text.display  0x00000000800103f8       0xb8 snake_demo.o
+                0x00000000800103f8                display
  .text.renderGameObject
-                0x0000000080010518       0xd8 snake_demo.o
-                0x0000000080010518                renderGameObject
+                0x00000000800104b0       0xd8 snake_demo.o
+                0x00000000800104b0                renderGameObject
  .text.renderGameObjects
-                0x00000000800105f0       0x54 snake_demo.o
-                0x00000000800105f0                renderGameObjects
+                0x0000000080010588       0x54 snake_demo.o
+                0x0000000080010588                renderGameObjects
  .text.moveSnake
-                0x0000000080010644       0xa8 snake_demo.o
-                0x0000000080010644                moveSnake
+                0x00000000800105dc       0xa8 snake_demo.o
+                0x00000000800105dc                moveSnake
  .text.renderSnake
-                0x00000000800106ec       0xbc snake_demo.o
-                0x00000000800106ec                renderSnake
+                0x0000000080010684       0xbc snake_demo.o
+                0x0000000080010684                renderSnake
+ .text.initializeSnake
+                0x0000000080010740       0x50 snake_demo.o
+                0x0000000080010740                initializeSnake
  .text.growSnake
-                0x00000000800107a8       0x28 snake_demo.o
-                0x00000000800107a8                growSnake
+                0x0000000080010790       0x28 snake_demo.o
+                0x0000000080010790                growSnake
  .text.moveFood
-                0x00000000800107d0       0x60 snake_demo.o
-                0x00000000800107d0                moveFood
- .text          0x0000000080010830       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a91.o)
-                0x0000000080010830                ChangeClearPAD
- .text          0x0000000080010840      0x290 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(pad.o)
-                0x0000000080010840                SetInitPadFlag
-                0x000000008001084c                ReadInitPadFlag
-                0x000000008001085c                PAD_init
-                0x00000000800108ec                InitPAD
-                0x000000008001097c                StartPAD
- .text          0x0000000080010ad0       0xa0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(patch.o)
-                0x0000000080010ad0                EnablePAD
-                0x0000000080010ae4                DisablePAD
-                0x0000000080010af8                _patch_pad
- .text          0x0000000080010b70       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a18.o)
-                0x0000000080010b70                InitPAD2
- .text          0x0000000080010b80       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a19.o)
-                0x0000000080010b80                StartPAD2
- .text          0x0000000080010b90       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a21.o)
-                0x0000000080010b90                PAD_init2
- .text          0x0000000080010ba0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a36.o)
-                0x0000000080010ba0                EnterCriticalSection
- .text          0x0000000080010bb0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a37.o)
-                0x0000000080010bb0                ExitCriticalSection
- .text          0x0000000080010bc0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c68.o)
-                0x0000000080010bc0                FlushCache
- .text          0x0000000080010bd0       0x70 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(chclrpad.o)
-                0x0000000080010bd0                _remove_ChgclrPAD
- .text          0x0000000080010c40       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l02.o)
-                0x0000000080010c40                SysEnqIntRP
- .text          0x0000000080010c50       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l03.o)
-                0x0000000080010c50                SysDeqIntRP
- .text          0x0000000080010c60       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c43.o)
-                0x0000000080010c60                memset
- .text          0x0000000080010c70       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c47.o)
-                0x0000000080010c70                rand
- .text          0x0000000080010c80       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c48.o)
-                0x0000000080010c80                srand
- .text          0x0000000080010c90       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c63.o)
-                0x0000000080010c90                printf
- .text          0x0000000080010ca0      0x210 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
-                0x0000000080010ca0                VSync
- .text          0x0000000080010eb0      0x120 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_vb.o)
-                0x0000000080010eb0                startIntrVSync
- .text          0x0000000080010fd0      0x6c0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
-                0x0000000080010fd0                ResetCallback
-                0x0000000080011000                InterruptCallback
-                0x0000000080011030                DMACallback
-                0x0000000080011060                VSyncCallback
-                0x0000000080011094                VSyncCallbacks
-                0x00000000800110c4                StopCallback
-                0x00000000800110f4                RestartCallback
-                0x0000000080011124                CheckCallback
-                0x0000000080011134                GetIntrMask
-                0x000000008001114c                SetIntrMask
- .text          0x0000000080011690      0x2a0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
-                0x0000000080011690                startIntrDMA
- .text          0x0000000080011930       0xc0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e03.o)
-                0x0000000080011930                SetDefDrawEnv
- .text          0x00000000800119f0       0x40 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e04.o)
-                0x00000000800119f0                SetDefDispEnv
- .text          0x0000000080011a30      0xa80 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
-                0x0000000080011a30                SetDumpFnt
-                0x0000000080011a70                FntLoad
-                0x0000000080011b10                FntOpen
-                0x0000000080011dcc                FntFlush
-                0x00000000800120e8                FntPrint
- .text          0x00000000800124b0       0x40 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p06.o)
-                0x00000000800124b0                AddPrim
- .text          0x00000000800124f0       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p09.o)
-                0x00000000800124f0                TermPrim
- .text          0x0000000080012510       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p10.o)
-                0x0000000080012510                SetSemiTrans
- .text          0x0000000080012540       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p20.o)
-                0x0000000080012540                SetSprt8
- .text          0x0000000080012560       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p26.o)
-                0x0000000080012560                SetTile
- .text          0x0000000080012580       0xa0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p41.o)
-                0x0000000080012580                SetDrawMode
- .text          0x0000000080012620     0x2f00 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
-                0x0000000080012620                ResetGraph
-                0x0000000080012794                SetGraphDebug
-                0x00000000800127f0                SetGraphQueue
-                0x0000000080012894                GetGraphDebug
-                0x00000000800128a4                DrawSyncCallback
-                0x0000000080012904                SetDispMask
-                0x000000008001299c                DrawSync
-                0x0000000080012b20                ClearImage
-                0x0000000080012bb0                ClearImage2
-                0x0000000080012c48                LoadImage
-                0x0000000080012ca8                StoreImage
-                0x0000000080012d08                MoveImage
-                0x0000000080012dc0                ClearOTag
-                0x0000000080012e88                ClearOTagR
-                0x0000000080012f34                DrawPrim
-                0x0000000080012f90                DrawOTag
-                0x0000000080013000                PutDrawEnv
-                0x00000000800130c0                DrawOTagEnv
-                0x0000000080013198                GetDrawEnv
-                0x00000000800131cc                PutDispEnv
-                0x00000000800136c4                GetDispEnv
-                0x00000000800136f8                GetODE
-                0x0000000080013728                SetDrawArea
-                0x00000000800137a8                SetDrawOffset
-                0x00000000800137e8                SetDrawEnv
-                0x00000000800150b8                LoadImage2
-                0x00000000800151a4                StoreImage2
-                0x0000000080015290                MoveImage2
-                0x00000000800153d4                DrawOTag2
-                0x00000000800154d0                _GPU_ResetCallback
- .text          0x0000000080015520       0xf0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e00.o)
-                0x0000000080015520                LoadTPage
- .text          0x0000000080015610       0x70 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e02.o)
-                0x0000000080015610                LoadClut2
- .text          0x0000000080015680       0x40 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p00.o)
-                0x0000000080015680                GetTPage
- .text          0x00000000800156c0       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p01.o)
-                0x00000000800156c0                GetClut
- .text          0x00000000800156e0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a23.o)
-                0x00000000800156e0                ReturnFromException
- .text          0x00000000800156f0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a24.o)
-                0x00000000800156f0                ResetEntryInt
- .text          0x0000000080015700       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a25.o)
-                0x0000000080015700                HookEntryInt
- .text          0x0000000080015710       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c114.o)
-                0x0000000080015718                _96_remove
- .text          0x0000000080015730       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c73.o)
-                0x0000000080015730                GPU_cw
- .text          0x0000000080015740       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l10.o)
-                0x0000000080015740                ChangeClearRCnt
- .text          0x0000000080015750       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(a63.o)
-                0x0000000080015758                puts
- .text          0x0000000080015770       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c19.o)
-                0x0000000080015770                setjmp
- .text          0x0000000080015780       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c27.o)
-                0x0000000080015780                strlen
- .text          0x0000000080015790       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c42.o)
-                0x0000000080015790                memcpy
- .text          0x00000000800157a0       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vmode.o)
-                0x00000000800157a0                SetVideoMode
-                0x00000000800157b4                GetVideoMode
-                0x00000000800157d0                . = ALIGN (0x10)
+                0x00000000800107b8       0x60 snake_demo.o
+                0x00000000800107b8                moveFood
+ .text          0x0000000080010818       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a91.o)
+                0x0000000080010818                ChangeClearPAD
+ .text          0x0000000080010828      0x290 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(pad.o)
+                0x0000000080010828                SetInitPadFlag
+                0x0000000080010834                ReadInitPadFlag
+                0x0000000080010844                PAD_init
+                0x00000000800108d4                InitPAD
+                0x0000000080010964                StartPAD
+ .text          0x0000000080010ab8       0xa0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(patch.o)
+                0x0000000080010ab8                EnablePAD
+                0x0000000080010acc                DisablePAD
+                0x0000000080010ae0                _patch_pad
+ .text          0x0000000080010b58       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a18.o)
+                0x0000000080010b58                InitPAD2
+ .text          0x0000000080010b68       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a19.o)
+                0x0000000080010b68                StartPAD2
+ .text          0x0000000080010b78       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a21.o)
+                0x0000000080010b78                PAD_init2
+ .text          0x0000000080010b88       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a36.o)
+                0x0000000080010b88                EnterCriticalSection
+ .text          0x0000000080010b98       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a37.o)
+                0x0000000080010b98                ExitCriticalSection
+ .text          0x0000000080010ba8       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c68.o)
+                0x0000000080010ba8                FlushCache
+ .text          0x0000000080010bb8       0x70 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(chclrpad.o)
+                0x0000000080010bb8                _remove_ChgclrPAD
+ .text          0x0000000080010c28       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l02.o)
+                0x0000000080010c28                SysEnqIntRP
+ .text          0x0000000080010c38       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l03.o)
+                0x0000000080010c38                SysDeqIntRP
+ .text          0x0000000080010c48       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c47.o)
+                0x0000000080010c48                rand
+ .text          0x0000000080010c58       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c48.o)
+                0x0000000080010c58                srand
+ .text          0x0000000080010c68       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c63.o)
+                0x0000000080010c68                printf
+ .text          0x0000000080010c78      0x210 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
+                0x0000000080010c78                VSync
+ .text          0x0000000080010e88      0x120 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_vb.o)
+                0x0000000080010e88                startIntrVSync
+ .text          0x0000000080010fa8      0x6c0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
+                0x0000000080010fa8                ResetCallback
+                0x0000000080010fd8                InterruptCallback
+                0x0000000080011008                DMACallback
+                0x0000000080011038                VSyncCallback
+                0x000000008001106c                VSyncCallbacks
+                0x000000008001109c                StopCallback
+                0x00000000800110cc                RestartCallback
+                0x00000000800110fc                CheckCallback
+                0x000000008001110c                GetIntrMask
+                0x0000000080011124                SetIntrMask
+ .text          0x0000000080011668      0x2a0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
+                0x0000000080011668                startIntrDMA
+ .text          0x0000000080011908       0xc0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e03.o)
+                0x0000000080011908                SetDefDrawEnv
+ .text          0x00000000800119c8       0x40 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e04.o)
+                0x00000000800119c8                SetDefDispEnv
+ .text          0x0000000080011a08      0xa80 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
+                0x0000000080011a08                SetDumpFnt
+                0x0000000080011a48                FntLoad
+                0x0000000080011ae8                FntOpen
+                0x0000000080011da4                FntFlush
+                0x00000000800120c0                FntPrint
+ .text          0x0000000080012488       0x40 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p06.o)
+                0x0000000080012488                AddPrim
+ .text          0x00000000800124c8       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p09.o)
+                0x00000000800124c8                TermPrim
+ .text          0x00000000800124e8       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p10.o)
+                0x00000000800124e8                SetSemiTrans
+ .text          0x0000000080012518       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p20.o)
+                0x0000000080012518                SetSprt8
+ .text          0x0000000080012538       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p26.o)
+                0x0000000080012538                SetTile
+ .text          0x0000000080012558       0xa0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p41.o)
+                0x0000000080012558                SetDrawMode
+ .text          0x00000000800125f8     0x2f00 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
+                0x00000000800125f8                ResetGraph
+                0x000000008001276c                SetGraphDebug
+                0x00000000800127c8                SetGraphQueue
+                0x000000008001286c                GetGraphDebug
+                0x000000008001287c                DrawSyncCallback
+                0x00000000800128dc                SetDispMask
+                0x0000000080012974                DrawSync
+                0x0000000080012af8                ClearImage
+                0x0000000080012b88                ClearImage2
+                0x0000000080012c20                LoadImage
+                0x0000000080012c80                StoreImage
+                0x0000000080012ce0                MoveImage
+                0x0000000080012d98                ClearOTag
+                0x0000000080012e60                ClearOTagR
+                0x0000000080012f0c                DrawPrim
+                0x0000000080012f68                DrawOTag
+                0x0000000080012fd8                PutDrawEnv
+                0x0000000080013098                DrawOTagEnv
+                0x0000000080013170                GetDrawEnv
+                0x00000000800131a4                PutDispEnv
+                0x000000008001369c                GetDispEnv
+                0x00000000800136d0                GetODE
+                0x0000000080013700                SetDrawArea
+                0x0000000080013780                SetDrawOffset
+                0x00000000800137c0                SetDrawEnv
+                0x0000000080015090                LoadImage2
+                0x000000008001517c                StoreImage2
+                0x0000000080015268                MoveImage2
+                0x00000000800153ac                DrawOTag2
+                0x00000000800154a8                _GPU_ResetCallback
+ .text          0x00000000800154f8       0xf0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e00.o)
+                0x00000000800154f8                LoadTPage
+ .text          0x00000000800155e8       0x70 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e02.o)
+                0x00000000800155e8                LoadClut2
+ .text          0x0000000080015658       0x40 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p00.o)
+                0x0000000080015658                GetTPage
+ .text          0x0000000080015698       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p01.o)
+                0x0000000080015698                GetClut
+ .text          0x00000000800156b8       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a23.o)
+                0x00000000800156b8                ReturnFromException
+ .text          0x00000000800156c8       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a24.o)
+                0x00000000800156c8                ResetEntryInt
+ .text          0x00000000800156d8       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a25.o)
+                0x00000000800156d8                HookEntryInt
+ .text          0x00000000800156e8       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c114.o)
+                0x00000000800156f0                _96_remove
+ .text          0x0000000080015708       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c73.o)
+                0x0000000080015708                GPU_cw
+ .text          0x0000000080015718       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l10.o)
+                0x0000000080015718                ChangeClearRCnt
+ .text          0x0000000080015728       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(a63.o)
+                0x0000000080015730                puts
+ .text          0x0000000080015748       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c19.o)
+                0x0000000080015748                setjmp
+ .text          0x0000000080015758       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c27.o)
+                0x0000000080015758                strlen
+ .text          0x0000000080015768       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c42.o)
+                0x0000000080015768                memcpy
+ .text          0x0000000080015778       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c43.o)
+                0x0000000080015778                memset
+ .text          0x0000000080015788       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vmode.o)
+                0x0000000080015788                SetVideoMode
+                0x000000008001579c                GetVideoMode
+                0x00000000800157c0                . = ALIGN (0x10)
+ *fill*         0x00000000800157b8        0x8 
  *(.init)
-                0x00000000800157d0                . = ALIGN (0x10)
+                0x00000000800157c0                . = ALIGN (0x10)
  *(.fini)
-                0x00000000800157d0                . = ALIGN (0x10)
-                0x00000000800157d0                __text_end = .
-                0x00000000800157d0                __ftext_end = ABSOLUTE (.)
-                0x00000000800157d0                __fdata_start = ABSOLUTE (.)
+                0x00000000800157c0                . = ALIGN (0x10)
+                0x00000000800157c0                __text_end = .
+                0x00000000800157c0                __ftext_end = ABSOLUTE (.)
+                0x00000000800157c0                __fdata_start = ABSOLUTE (.)
 
-.rodata         0x00000000800157d0      0x3c0
+.rodata         0x00000000800157c0      0x3b0
  *(.rodata .rodata.* .rdata .rdata.* .gnu.linkonce.r.*)
  .rodata.str1.4
-                0x00000000800157d0       0x37 snake_demo.o
- *fill*         0x0000000080015807        0x1 
- .rodata        0x0000000080015808       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
- .rdata         0x0000000080015818       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
- .rdata         0x0000000080015828       0x70 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
- .rdata         0x0000000080015898       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
- .rdata         0x00000000800158c8       0xa0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
- .rdata         0x0000000080015968      0x220 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
-                0x0000000080015b90                . = ALIGN (0x10)
- *fill*         0x0000000080015b88        0x8 
-                0x0000000080015b90                __preinit_array_start = .
+                0x00000000800157c0       0x24 snake_demo.o
+ .rodata        0x00000000800157e4       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
+ *fill*         0x00000000800157f4        0x4 
+ .rdata         0x00000000800157f8       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
+ .rdata         0x0000000080015808       0x70 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
+ .rdata         0x0000000080015878       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
+ .rdata         0x00000000800158a8       0xa0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
+ .rdata         0x0000000080015948      0x220 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
+                0x0000000080015b70                . = ALIGN (0x10)
+ *fill*         0x0000000080015b68        0x8 
+                0x0000000080015b70                __preinit_array_start = .
  *(.preinit_array)
-                0x0000000080015b90                __preinit_array_end = .
-                0x0000000080015b90                . = ALIGN (0x10)
-                0x0000000080015b90                __init_array_start = .
+                0x0000000080015b70                __preinit_array_end = .
+                0x0000000080015b70                . = ALIGN (0x10)
+                0x0000000080015b70                __init_array_start = .
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
-                0x0000000080015b90                . = ALIGN (0x10)
+                0x0000000080015b70                . = ALIGN (0x10)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT_BY_NAME(.ctors.*))
  *crtend.o(.ctors)
-                0x0000000080015b90                __init_array_end = .
-                0x0000000080015b90                . = ALIGN (0x10)
-                0x0000000080015b90                __fini_array_start = .
+                0x0000000080015b70                __init_array_end = .
+                0x0000000080015b70                . = ALIGN (0x10)
+                0x0000000080015b70                __fini_array_start = .
  *(.fini_array)
  *(SORT_BY_NAME(.fini_array.*))
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT_BY_NAME(.dtors.*))
  *crtend.o(.dtors)
-                0x0000000080015b90                __fini_array_end = .
-                0x0000000080015b90                __build_id = .
+                0x0000000080015b70                __fini_array_end = .
+                0x0000000080015b70                __build_id = .
  *(.note.gnu.build-id)
-                0x0000000080015b90                __build_id_end = .
+                0x0000000080015b70                __build_id_end = .
 
-.rel.dyn        0x0000000080015b90        0x0
- .rel.dyn       0x0000000080015b90        0x0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
+.rel.dyn        0x0000000080015b70        0x0
+ .rel.dyn       0x0000000080015b70        0x0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
 
 .rodata1
  *(.rodata1)
-                0x0000000080015b90                __data_start = .
+                0x0000000080015b70                __data_start = .
 
-.data           0x0000000080015b90     0x2470
+.data           0x0000000080015b70     0x2490
  *(.a0table)
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x0000000080015b90       0x3c snake_demo.o
-                0x0000000080015b90                WHITE
-                0x0000000080015b9c                YELLOW
-                0x0000000080015ba8                GREEN
-                0x0000000080015bb4                BLUE
-                0x0000000080015bc0                RED
- *fill*         0x0000000080015bcc        0x4 
- .data          0x0000000080015bd0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(pad.o)
- .data          0x0000000080015be0       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
-                0x0000000080015bf0                Hcount
- .data          0x0000000080015c00       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_vb.o)
-                0x0000000080015c20                Vcount
- .data          0x0000000080015c30     0x1100 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
- .data          0x0000000080016d30       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
- .data          0x0000000080016d60      0xb90 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
-                0x0000000080016d60                Font
- .data          0x00000000800178f0      0x1a0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
-                0x000000008001793c                GPU_printf
-                0x0000000080017940                GEnv
-                0x0000000080017a68                _qin
-                0x0000000080017a6c                _qout
- .data          0x0000000080017a90       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vmode.o)
+ .data          0x0000000080015b70       0x3c snake_demo.o
+                0x0000000080015b70                WHITE
+                0x0000000080015b7c                YELLOW
+                0x0000000080015b88                GREEN
+                0x0000000080015b94                BLUE
+                0x0000000080015ba0                RED
+ *fill*         0x0000000080015bac        0x4 
+ .data          0x0000000080015bb0       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(pad.o)
+ .data          0x0000000080015bc0       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
+                0x0000000080015bd0                Hcount
+ .data          0x0000000080015be0       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_vb.o)
+                0x0000000080015c00                Vcount
+ .data          0x0000000080015c10     0x1100 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
+ .data          0x0000000080016d10       0x30 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
+ .data          0x0000000080016d40      0xb90 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
+                0x0000000080016d40                Font
+ .data          0x00000000800178d0      0x1a0 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
+                0x000000008001791c                GPU_printf
+                0x0000000080017920                GEnv
+                0x0000000080017a48                _qin
+                0x0000000080017a4c                _qout
+ .data          0x0000000080017a70       0x10 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vmode.o)
  *(.data1)
  *(.sdata .sdata.* .gnu.linkonce.s.*)
  *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
  *(.got.plt)
  *(.got)
                 0x0000000080018000                . = ALIGN (0x800)
- *fill*         0x0000000080017aa0      0x560 
+ *fill*         0x0000000080017a80      0x580 
                 0x0000000080018000                __data_end = .
                 0x0000000080018000                __fdata_end = .
                 0x0000000080018000                __bss_start = .
@@ -550,52 +552,52 @@ OUTPUT(snake_demo.elf elf32-littlemips)
  .note          0x0000000000000414       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(chclrpad.o)
  .note          0x0000000000000488       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l02.o)
  .note          0x00000000000004fc       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l03.o)
- .note          0x0000000000000570       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c43.o)
- .note          0x00000000000005e4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c47.o)
- .note          0x0000000000000658       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c48.o)
- .note          0x00000000000006cc       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c63.o)
- .note          0x0000000000000740       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
- .note          0x00000000000007b4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_vb.o)
- .note          0x0000000000000828       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
- .note          0x000000000000089c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
- .note          0x0000000000000910       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e03.o)
- .note          0x0000000000000984       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e04.o)
- .note          0x00000000000009f8       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
- .note          0x0000000000000a6c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p06.o)
- .note          0x0000000000000ae0       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p09.o)
- .note          0x0000000000000b54       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p10.o)
- .note          0x0000000000000bc8       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p20.o)
- .note          0x0000000000000c3c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p26.o)
- .note          0x0000000000000cb0       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p41.o)
- .note          0x0000000000000d24       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
- .note          0x0000000000000d98       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e00.o)
- .note          0x0000000000000e0c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e02.o)
- .note          0x0000000000000e80       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p00.o)
- .note          0x0000000000000ef4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p01.o)
- .note          0x0000000000000f68       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a23.o)
- .note          0x0000000000000fdc       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a24.o)
- .note          0x0000000000001050       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a25.o)
- .note          0x00000000000010c4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c114.o)
- .note          0x0000000000001138       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c73.o)
- .note          0x00000000000011ac       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l10.o)
- .note          0x0000000000001220       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(a63.o)
- .note          0x0000000000001294       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c19.o)
- .note          0x0000000000001308       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c27.o)
- .note          0x000000000000137c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c42.o)
+ .note          0x0000000000000570       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c47.o)
+ .note          0x00000000000005e4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c48.o)
+ .note          0x0000000000000658       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c63.o)
+ .note          0x00000000000006cc       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vsync.o)
+ .note          0x0000000000000740       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_vb.o)
+ .note          0x00000000000007b4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr.o)
+ .note          0x0000000000000828       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(intr_dma.o)
+ .note          0x000000000000089c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e03.o)
+ .note          0x0000000000000910       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e04.o)
+ .note          0x0000000000000984       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(font.o)
+ .note          0x00000000000009f8       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p06.o)
+ .note          0x0000000000000a6c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p09.o)
+ .note          0x0000000000000ae0       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p10.o)
+ .note          0x0000000000000b54       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p20.o)
+ .note          0x0000000000000bc8       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p26.o)
+ .note          0x0000000000000c3c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p41.o)
+ .note          0x0000000000000cb0       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(sys.o)
+ .note          0x0000000000000d24       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e00.o)
+ .note          0x0000000000000d98       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(e02.o)
+ .note          0x0000000000000e0c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p00.o)
+ .note          0x0000000000000e80       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libgpu.a(p01.o)
+ .note          0x0000000000000ef4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a23.o)
+ .note          0x0000000000000f68       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a24.o)
+ .note          0x0000000000000fdc       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(a25.o)
+ .note          0x0000000000001050       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c114.o)
+ .note          0x00000000000010c4       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(c73.o)
+ .note          0x0000000000001138       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libapi.a(l10.o)
+ .note          0x00000000000011ac       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(a63.o)
+ .note          0x0000000000001220       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c19.o)
+ .note          0x0000000000001294       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c27.o)
+ .note          0x0000000000001308       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c42.o)
+ .note          0x000000000000137c       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libc.a(c43.o)
  .note          0x00000000000013f0       0x74 C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/lib\libetc.a(vmode.o)
 
-.debug_info     0x0000000000000000     0x1168
- .debug_info    0x0000000000000000     0x1144 snake_demo.o
- .debug_info    0x0000000000001144       0x24 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
+.debug_info     0x0000000000000000     0x110e
+ .debug_info    0x0000000000000000     0x10ea snake_demo.o
+ .debug_info    0x00000000000010ea       0x24 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
 
-.debug_abbrev   0x0000000000000000      0x4c6
- .debug_abbrev  0x0000000000000000      0x4b2 snake_demo.o
- .debug_abbrev  0x00000000000004b2       0x14 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
+.debug_abbrev   0x0000000000000000      0x4ba
+ .debug_abbrev  0x0000000000000000      0x4a6 snake_demo.o
+ .debug_abbrev  0x00000000000004a6       0x14 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
 
 .debug_loclists
-                0x0000000000000000      0x376
+                0x0000000000000000      0x37c
  .debug_loclists
-                0x0000000000000000      0x376 snake_demo.o
+                0x0000000000000000      0x37c snake_demo.o
 
 .debug_aranges  0x0000000000000000       0xa0
  .debug_aranges
@@ -604,18 +606,18 @@ OUTPUT(snake_demo.elf elf32-littlemips)
                 0x0000000000000080       0x20 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
 
 .debug_rnglists
-                0x0000000000000000       0xcd
+                0x0000000000000000       0xbe
  .debug_rnglists
-                0x0000000000000000       0xcd snake_demo.o
+                0x0000000000000000       0xbe snake_demo.o
 
-.debug_line     0x0000000000000000      0x6dc
- .debug_line    0x0000000000000000      0x681 snake_demo.o
- .debug_line    0x0000000000000681       0x5b C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
+.debug_line     0x0000000000000000      0x6a6
+ .debug_line    0x0000000000000000      0x64b snake_demo.o
+ .debug_line    0x000000000000064b       0x5b C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
 
-.debug_str      0x0000000000000000      0x500
- .debug_str     0x0000000000000000      0x4ed snake_demo.o
-                                        0x525 (size before relaxing)
- .debug_str     0x00000000000004ed       0x13 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
+.debug_str      0x0000000000000000      0x4e8
+ .debug_str     0x0000000000000000      0x4d5 snake_demo.o
+                                        0x506 (size before relaxing)
+ .debug_str     0x00000000000004d5       0x13 C:/Users/magnu/Documents/GitHub/PS1Demos/thirdparty/nugget/common/crt0/crt0.o
                                          0x47 (size before relaxing)
 
 .debug_frame    0x0000000000000000      0x184

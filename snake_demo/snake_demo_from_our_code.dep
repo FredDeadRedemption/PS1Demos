@@ -1,0 +1,16 @@
+snake_demo_from_our_code.o: snake_demo_from_our_code.c \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/sys/types.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/libgte.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/libetc.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/libgpu.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/libapi.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/kernel.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/r3000.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/asm.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/stdlib.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/stddef.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/abs.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/convert.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/malloc.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/qsort.h \
+ C:/Users/magnu/Documents/GitHub/PS1Demos/psyq/include/rand.h

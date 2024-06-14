@@ -60,7 +60,7 @@
     "FullCaching": false,
     "GUITheme": 0,
     "HardwareRenderer": false,
-    "IsoPath": "C:\\Users\\magnu\\Documents\\GitHub\\PS1Demos\\snake_demo",
+    "IsoPath": "C:\\OCaml64\\home\\magnu\\OCamlProject\\PS1Compiler\\compile\\output",
     "KioskMode": false,
     "LinearFiltering": true,
     "Locale": "",
@@ -152,7 +152,7 @@
     "WindowSizeX": 1280,
     "WindowSizeY": 800
   },
-  "imgui": "[Window][Debug##Default]\nPos=60,60\nSize=400,400\nCollapsed=0\n\n[Window][Update configuration]\nViewportPos=10,20\nViewportId=0x8C93FDF7\nSize=577,392\nCollapsed=0\n\n[Window][###Open Binary]\nPos=340,200\nSize=600,400\nCollapsed=0\n\n[Table][0xF043A2BA,3]\nRefScale=24\nColumn 0  Sort=0v\n\n[Table][0xE2A30D4B,2]\nRefScale=24\nColumn 0  Width=125\nColumn 1  Weight=1.0000\n\n[Docking][Data]\n\n",
+  "imgui": "[Window][Debug##Default]\nPos=60,60\nSize=400,400\nCollapsed=0\n\n[Window][Update configuration]\nViewportPos=10,20\nViewportId=0x8C93FDF7\nSize=577,392\nCollapsed=0\n\n[Window][###Open Binary]\nPos=340,200\nSize=600,400\nCollapsed=0\n\n[Window][Main VRAM Viewer]\nViewportPos=44,149\nViewportId=0xD2F1ACB4\nSize=1878,1018\nCollapsed=0\n\n[Window][System Configuration]\nViewportPos=10,20\nViewportId=0xCE39F60F\nSize=1024,512\nCollapsed=0\n\n[Table][0xF043A2BA,3]\nRefScale=24\nColumn 0  Sort=0v\n\n[Table][0xE2A30D4B,2]\nRefScale=24\nColumn 0  Width=125\nColumn 1  Weight=1.0000\n\n[Docking][Data]\n\n",
   "loggers": {
     "CDROM": {
       "displayed": true,

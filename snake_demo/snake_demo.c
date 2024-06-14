@@ -372,7 +372,8 @@ int main() {
 
         ClearOTagR(ot[db], OTLEN);  // Clear ordering table
 
-        renderGameObjects(gameObjects, size_gameObjects);
+        //renderGameObjects(gameObjects, size_gameObjects);
+        renderGameObject(&snake.base);
         renderSnake(&snake);
         
 
